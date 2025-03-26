@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import "tailwindcss";
+body {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+
+
+  /* Imagen de fondo */
+  min-height: 94vh;
+  background-image: url('../assets/img/fondo1.jpeg'); /* Ruta de la imagen */
+  background-size: cover; /* Ajusta la imagen al tamaño de la pantalla */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que se repita */
+
+
+}
+
+#header-tittle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+
+#titulo{
+  font-family: 'Oswald', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+
+  display: inline-block;
+
+  font-size: 50px;
+  text-shadow: 4px 4px 6px rgb(0, 0, 0);
+  padding: 10px;
+
+  width: fit-content;
+  height: auto;
+  margin: 0 auto;
+  text-align: center;
+
+  background-color: rgb(255, 0, 0);
+  border-radius: 15px;
+  color: white;
+  
+}
+
+
+.btn-mb{
+
+  padding: 10px;
+  font-size: 20px;
+  margin: 10px 40px;
+  border-radius: 10px;
+  border: none;
+  background-color: #ffffff;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.8);
+  color: #000000;
+}
+
+#H2-sesion{
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+
+  text-align: center;
+  margin-top: 10vh;
+  font-size: 40px;
+  text-shadow: 4px 4px 3px rgba(0, 0, 0, 1);
+  color: #E6B422;
+}
+
+#formIngresar{
+  margin-top: 5vh;
+  padding: 10px;
+  backdrop-filter: blur(2px);
+}
+
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1); /* Capa semitransparente */
+  backdrop-filter: blur(1.5px); /* Aplica desenfoque */
+  z-index: -1;
+}

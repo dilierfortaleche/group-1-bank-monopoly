@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+#container_btn{
+    margin-top: 10rem;
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto(2,1rem);
+    gap: 3rem;
+}
