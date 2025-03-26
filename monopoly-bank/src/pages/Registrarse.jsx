@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import axios from "axios";
+
 
 
 
@@ -18,13 +20,17 @@ export default function Register() {
 
     //Validar contraseñas
     if (password !== confirmPassword) {
-      alert("Las contraseñas no coinciden");
+      Swal.fire({
+        icon: "error",
+        title: "",
+        text: "Tus contraseñas no coinciden!"
+      });
       return;
     }
 
 
     try {
-      const response = await axios.post("TU_URL_BACKEND/api/register", {
+      const response = await axios.post("http://localhost:4000/api/users/register", {
         name,
         email,
         password,
