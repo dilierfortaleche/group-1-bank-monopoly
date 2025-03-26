@@ -1,9 +1,13 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 
-const gameSchema = new mongoose.Schema({
+export interface IGame extends Document {
+    code: string;
+    players: mongoose.Types.ObjectId[]; // IDs de los jugadores
+}
+
+const gameSchema = new Schema<IGame>({
     code: { type: String, required: true, unique: true },
-    players: [{ type: String }], // Lista de emails de jugadores
+    players: [{ type: Schema.Types.ObjectId, ref: "Player" }],
 });
 
-const Game = mongoose.model("Game", gameSchema);
-export default Game;
+export default mongoose.model<IGame>("Game", gameSchema);

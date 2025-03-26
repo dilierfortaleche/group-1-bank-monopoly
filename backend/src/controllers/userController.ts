@@ -3,8 +3,8 @@ import User from "../models/User";
 
 export const registerUser = async (req: Request, res: Response) => {
     try {
-        const { email, password } = req.body;
-        const newUser = new User({ email, password });
+        const { name, email, password } = req.body;
+        const newUser = new User({name, email, password });
         await newUser.save();
         res.status(201).json({ message: "Usuario registrado con éxito" });
     } catch (error) {
