@@ -5,7 +5,6 @@ import axios from "axios";
 
 export default function Login() {
   const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,46 +12,48 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:4000/api/users/Login", {
-        email,
-        password,
+      const { data } = await axios.post(
+        "http://localhost:4000/api/users/Login",
+        {
+          email,
+          password,
+        }
+      );
+
+      // Guardar token si el backend lo envía
+      //if (data.token) {
+      //  localStorage.setItem("token", data.token);
+      //}
+
+      Swal.fire({
+        icon: "success",
+        title: "Bienvenido!",
       });
 
-      // Verificar si la respuesta es correcta
-      if (response.status === 200) {
-        Swal.fire({
-          icon: "Dreag me",
-          title: "Bienvenido!",
-        });
-        navigate("/Lobby_Game");
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Lo sentimos :(",
-          text: response.data.message || "Revisa la información ingresada!",
-        });
-
-        console.error("Error en la información ingresada.");
-      }
+      navigate("/Lobby_Game"); // Redirigir a la página del juego
     } catch (err) {
       console.error("Error en la solicitud:", err);
+
       Swal.fire({
         icon: "error",
         title: "Lo sentimos :(",
-        text: err.response?.data?.message || "Tenemos problemas con nuestro servidor!",
+        text:
+          err.response?.data?.message ||
+          "Tenemos problemas con nuestro servidor!",
       });
     }
   };
 
   return (
     <div className="p-8 m-5 rounded-lg shadow-lg bg-transparent border border-gray-300">
-      {/* Título */}
-      <h2 className="text-black text-center text-4xl font-bold mb-6">Iniciar Sesión</h2>
-
-      {/* Formulario */}
+      <h2 className="text-black text-center text-4xl font-bold mb-6">
+        Iniciar Sesión
+      </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-gray-700 font-semibold mb-1">Correo electrónico</label>
+          <label className="block text-gray-700 font-semibold mb-1">
+            Correo electrónico
+          </label>
           <input
             type="email"
             value={email}
@@ -65,7 +66,9 @@ export default function Login() {
         </div>
 
         <div>
-          <label className="block text-gray-700 font-semibold mb-1">Contraseña</label>
+          <label className="block text-gray-700 font-semibold mb-1">
+            Contraseña
+          </label>
           <input
             type="password"
             value={password}
@@ -76,7 +79,6 @@ export default function Login() {
           />
         </div>
 
-        {/* Botón */}
         <button
           type="submit"
           className="w-full p-3 text-lg rounded-md bg-white bg-opacity-80 border border-gray-300 shadow-md 
@@ -84,8 +86,11 @@ export default function Login() {
         >
           Ingresar
         </button>
-        
-        <Link to="/Registro" className="block text-center text-blue-900 text-[22px] underline drop-shadow-lg mt-2">
+
+        <Link
+          to="/Registro"
+          className="block text-center text-blue-900 text-[22px] underline drop-shadow-lg mt-2"
+        >
           Registrarse
         </Link>
       </form>
