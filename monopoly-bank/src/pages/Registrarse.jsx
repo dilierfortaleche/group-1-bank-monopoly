@@ -64,7 +64,7 @@ export default function Register() {
         {/* Título */}
         <h2 className="text-black text-center text-4xl font-bold mb-6 ">
           Registrarte
-       </h2>
+        </h2>
 
 
         <form onSubmit={handleSubmit} className="space-y-6 ">

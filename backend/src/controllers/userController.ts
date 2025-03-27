@@ -9,22 +9,27 @@ if (!process.env.JWT_SECRET) {
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// 📝 REGISTRAR USUARIO
 export const registerUser = async (req: Request, res: Response) => {
   try {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
+
+    // Verificar que todos los campos estén presentes
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: "Todos los campos son obligatorios" });
+    }
 
     // Verificar si el usuario ya existe
     const existingUser = await User.findOne({ email });
-    if (existingUser)
+    if (existingUser) {
       return res.status(400).json({ message: "El usuario ya existe" });
+    }
 
     // Encriptar la contraseña antes de guardarla
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Crear nuevo usuario con la contraseña encriptada
-    const newUser = new User({ email, password: hashedPassword });
+    const newUser = new User({ name, email, password: hashedPassword });
     await newUser.save();
 
     res.status(201).json({ message: "Usuario registrado exitosamente" });
@@ -32,6 +37,7 @@ export const registerUser = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Error al registrar usuario", error });
   }
 };
+
 
 // 📝 INICIAR SESIÓN
 export const loginUser = async (req: Request, res: Response) => {
